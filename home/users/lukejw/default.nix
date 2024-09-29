@@ -3,6 +3,7 @@
 {
   imports =
     [
+      ../../themes/gruvbox
       ../../programs/firefox
     ];
   
