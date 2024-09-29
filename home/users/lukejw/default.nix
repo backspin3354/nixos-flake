@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 
 {
   imports =
@@ -42,22 +42,15 @@
   wayland.windowManager.sway = {
     enable = true;
     package = null;
-    config = {
-      keybindings = let
-        mod = "Mod4";
-        term = "footclient";
-      in {
-        "${mod}+Return" = "exec ${term}";
-        "${mod}+Shift+Return" = "exec firefox";
-
-        "${mod}+Tab" = "exec $(tofi-drun --drun-launch=false --terminal=${term})";
-        "${mod}+Shift+Tab" = "exec ${term} $(tofi-run)";
-        
-        "${mod}+c" = "kill";
-        
-        "${mod}+r" = "reload";
-        "${mod}+q" = "exec swaymsg exit";
-      };
+    config = let
+      term = "footclient";
+    in {
+      modifier = "Mod4";
+      terminal = "${term}";
+      menu = "$(tofi-drun --drun-launch=false --terminal=${term})";
+      startup = [
+        { command = "${term} fastfetch"; }
+      ];
     };
   };
 }
