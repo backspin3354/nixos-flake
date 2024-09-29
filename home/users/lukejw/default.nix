@@ -13,11 +13,13 @@
   ];
     
   programs.btop.enable = true;
-       
+         
   programs.git = {
     userName = "Luke Willis";
     userEmail = "backspin3354@proton.me";
   };
+
+  programs.tofi.enable = true;
 
   programs.foot = {
     enable = true;
@@ -43,9 +45,14 @@
     config = {
       keybindings = let
         mod = "Mod4";
+        term = "footclient";
       in {
-        "${mod}+Return" = "exec footclient";
+        "${mod}+Return" = "exec ${term}";
         "${mod}+Shift+Return" = "exec firefox";
+
+        "${mod}+Tab" = "exec $(tofi-drun --drun-launch=false --terminal=${term})";
+        "${mod}+Shift+Tab" = "exec ${term} $(tofi-run)";
+        
         "${mod}+c" = "kill";
         
         "${mod}+r" = "reload";
