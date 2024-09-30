@@ -11,6 +11,7 @@
 
   home.packages = with pkgs; [
     github-desktop
+    swaybg
   ];
     
   programs.btop.enable = true;
@@ -46,11 +47,19 @@
     config = let
       term = "footclient";
     in {
+      defaultWorkspace = "1";
+
       modifier = "Mod4";
       terminal = "${term}";
       menu = "$(tofi-drun --drun-launch=false --terminal=${term})";
-      startup = [
-        { command = "${term} fastfetch"; }
+            
+      startup = let
+        wallpaper = pkgs.fetchurl {
+          url = "https://raw.githubusercontent.com/AngelJumbo/gruvbox-wallpapers/refs/heads/main/wallpapers/irl/forest.jpg";
+          hash = "sha256-mqrwRvJmRLK3iyEiXmaw5UQPftEaqg33NhwzpZvyXws=";
+        };
+      in [
+        { command = "swaybg -i ${wallpaper} -o \"*\""; }
       ];
     };
   };

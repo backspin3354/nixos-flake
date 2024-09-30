@@ -22,6 +22,12 @@
       name = "Gruvbox-Plus-Dark";
     };
   };
+
+  # Sway
+  wayland.windowManager.sway.config.fonts = {
+    names = [ "monospace" ];
+    size = 10.0;
+  };
   
   # Foot
   programs.foot.settings = {
