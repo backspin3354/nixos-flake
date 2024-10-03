@@ -33,6 +33,14 @@
     };
   };
 
+  services.wlsunset = {
+    enable = true;
+    sunrise = "07:30";
+    temperature.day = 6500;
+    sunset = "19:30";
+    temperature.night = 2000;
+  };
+
   programs.helix = {
     enable = true;
     settings.editor = {
@@ -48,7 +56,6 @@
       term = "footclient";
     in {
       defaultWorkspace = "1";
-
       modifier = "Mod4";
       terminal = "${term}";
       menu = "$(tofi-drun --drun-launch=false --terminal=${term})";
